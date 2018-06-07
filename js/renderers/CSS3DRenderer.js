@@ -1,7 +1,6 @@
 /**
  * Based on http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
  * @author mrdoob / http://mrdoob.com/
- * @author yomotsu / https://yomotsu.net/
  */
 
 THREE.CSS3DObject = function ( element ) {
@@ -48,7 +47,7 @@ THREE.CSS3DRenderer = function () {
 
 	var cache = {
 		camera: { fov: 0, style: '' },
-		objects: new WeakMap()
+		objects: {}
 	};
 
 	var domElement = document.createElement( 'div' );
@@ -59,11 +58,14 @@ THREE.CSS3DRenderer = function () {
 	var cameraElement = document.createElement( 'div' );
 
 	cameraElement.style.WebkitTransformStyle = 'preserve-3d';
+	cameraElement.style.MozTransformStyle = 'preserve-3d';
 	cameraElement.style.transformStyle = 'preserve-3d';
 
 	domElement.appendChild( cameraElement );
 
 	var isIE = /Trident/i.test( navigator.userAgent );
+
+	this.setClearColor = function () {};
 
 	this.getSize = function () {
 
@@ -184,22 +186,21 @@ THREE.CSS3DRenderer = function () {
 			}
 
 			var element = object.element;
-			var cachedStyle = cache.objects.get( object );
+			var cachedStyle = cache.objects[ object.id ] && cache.objects[ object.id ].style;
 
 			if ( cachedStyle === undefined || cachedStyle !== style ) {
 
 				element.style.WebkitTransform = style;
+				element.style.MozTransform = style;
 				element.style.transform = style;
 
-				var objectData = { style: style };
+				cache.objects[ object.id ] = { style: style };
 
 				if ( isIE ) {
 
-					objectData.distanceToCameraSquared = getDistanceToSquared( camera, object );
+					cache.objects[ object.id ].distanceToCameraSquared = getDistanceToSquared( camera, object );
 
 				}
-
-				cache.objects.set( object, objectData );
 
 			}
 
@@ -235,38 +236,26 @@ THREE.CSS3DRenderer = function () {
 
 	}();
 
-	function filterAndFlatten( scene ) {
+	function zOrder( scene ) {
 
-		var result = [];
+		var order = Object.keys( cache.objects ).sort( function ( a, b ) {
+
+			return cache.objects[ a ].distanceToCameraSquared - cache.objects[ b ].distanceToCameraSquared;
+
+		} );
+		var zMax = order.length;
 
 		scene.traverse( function ( object ) {
 
-			if ( object instanceof THREE.CSS3DObject ) result.push( object );
+			var index = order.indexOf( object.id + '' );
+
+			if ( index !== - 1 ) {
+
+				object.element.style.zIndex = zMax - index;
+
+			}
 
 		} );
-
-		return result;
-
-	}
-
-	function zOrder( scene ) {
-
-		var sorted = filterAndFlatten( scene ).sort( function ( a, b ) {
-
-			var distanceA = cache.objects.get( a ).distanceToCameraSquared;
-			var distanceB = cache.objects.get( b ).distanceToCameraSquared;
-
-			return distanceA - distanceB;
-
-		} );
-
-		var zMax = sorted.length;
-
-		for ( var i = 0, l = sorted.length; i < l; i ++ ) {
-
-			sorted[ i ].element.style.zIndex = zMax - i;
-
-		}
 
 	}
 
@@ -276,12 +265,9 @@ THREE.CSS3DRenderer = function () {
 
 		if ( cache.camera.fov !== fov ) {
 
-			if ( camera.isPerspectiveCamera ) {
-
-				domElement.style.WebkitPerspective = fov + 'px';
-				domElement.style.perspective = fov + 'px';
-
-			}
+			domElement.style.WebkitPerspective = fov + 'px';
+			domElement.style.MozPerspective = fov + 'px';
+			domElement.style.perspective = fov + 'px';
 
 			cache.camera.fov = fov;
 
@@ -291,9 +277,8 @@ THREE.CSS3DRenderer = function () {
 
 		if ( camera.parent === null ) camera.updateMatrixWorld();
 
-		var cameraCSSMatrix = camera.isOrthographicCamera ?
-			'scale(' + fov + ')' + getCameraCSSMatrix( camera.matrixWorldInverse ) :
-			'translateZ(' + fov + 'px)' + getCameraCSSMatrix( camera.matrixWorldInverse );
+		var cameraCSSMatrix = 'translateZ(' + fov + 'px)' +
+			getCameraCSSMatrix( camera.matrixWorldInverse );
 
 		var style = cameraCSSMatrix +
 			'translate(' + _widthHalf + 'px,' + _heightHalf + 'px)';
@@ -301,6 +286,7 @@ THREE.CSS3DRenderer = function () {
 		if ( cache.camera.style !== style && ! isIE ) {
 
 			cameraElement.style.WebkitTransform = style;
+			cameraElement.style.MozTransform = style;
 			cameraElement.style.transform = style;
 
 			cache.camera.style = style;

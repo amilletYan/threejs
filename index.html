@@ -252,7 +252,10 @@
 			camera.position.z = 5500;
 
 			scene = new THREE.Scene();
-
+			scene.background = new THREE.CubeTextureLoader()
+					.setPath( 'MilkyWay/' )
+					.load( [ 'px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg' ] );
+					
 			for (var i = 0; i < table.length; i += 3) {
 
 				var element = document.createElement('div');
@@ -301,7 +304,7 @@
 
 				var object = new THREE.Object3D();
 
-				spherical.set(850, phi, theta);
+				spherical.set(300, phi, theta);
 
 				object.position.setFromSpherical(spherical);
 
@@ -320,12 +323,12 @@
 
 			for (var i = 0, l = objects.length; i < l; i++) {
 
-				var theta = i * 0.175 + Math.PI;
-				var y = - (i * 8) + 450;
+				var theta = i * 0.5 + Math.PI;
+				var y = - (i * 58) + 450;
 
 				var object = new THREE.Object3D();
 
-				cylindrical.set(850, theta, y);
+				cylindrical.set(300, theta, y);
 
 				object.position.setFromCylindrical(cylindrical);
 

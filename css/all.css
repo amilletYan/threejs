@@ -1,0 +1,215 @@
+html,
+		body {
+			height: 100%;
+		}
+
+		body {
+
+			background-color: #000000;
+			margin: 0;
+			font-family: Helvetica, sans-serif;
+			overflow: hidden;
+		}
+
+		#menu {
+			position: absolute;
+			bottom: 20px;
+			width: 100%;
+			text-align: center;
+		}
+
+		.element {
+			width: 300px;
+			height: 400px;
+			box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+			border: 10px solid rgba(127, 255, 255, 0.25);
+			text-align: center;
+			cursor: default;
+		}
+
+		.element:hover {
+			box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+			border: 10px solid rgba(127, 255, 255, 0.75);
+		}
+
+		.element .number {
+			position: absolute;
+			top: 10px;
+			right: 20px;
+			font-size: 50px;
+			color: rgba(127, 255, 255, 0.75);
+		}
+
+		.element .symbol {
+			position: absolute;
+			top: 50px;
+			left: 0px;
+			right: 0px;
+			font-size: 150px;
+			font-weight: bold;
+			color: rgba(255, 255, 255, 0.75);
+			text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+		}
+
+		.element .details {
+			position: absolute;
+			bottom: 2px;
+			left: 0px;
+			right: 0px;
+			font-size: 60px;
+			color: rgba(127, 255, 255, 0.75);
+		}
+
+
+        #bigelement .bignumber {
+			position: absolute;
+			top: 4%;
+			right:6%;
+			font-size:80px;
+			color: rgba(127, 255, 255, 0.75);
+		}
+
+		#bigelement .bigsymbol {
+			position: absolute;
+			top: 13%;
+			left: 8%;
+			font-size: 100px;
+			font-weight: bold;
+			color: rgba(255, 255, 255, 0.75);
+			text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+		}
+        #bigelement .bigcont {
+			position: absolute;
+			top:38%;
+			left: 10%;
+            font-size: 60px;        
+			color: rgba(127, 255, 255, 0.75);
+        }
+		#bigelement .bigdetails {
+			position: absolute;
+			bottom: 8%;
+			right: 5%;
+            font-size: 60px;
+			color: rgba(127, 255, 255, 0.75);
+        }
+      
+
+		button {
+			color: rgba(127, 255, 255, 0.75);
+			background: transparent;
+			outline: 1px solid rgba(127, 255, 255, 0.75);
+			border: 0px;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: rgba(0, 255, 255, 0.5);
+		}
+
+		button:active {
+			color: #000000;
+			background-color: rgba(0, 255, 255, 0.75);
+		}
+
+		#bigelement {
+			position: absolute;
+			left: 10%;
+			top: 20%;
+			width: 80%;
+			height: 60%;
+		    border-radius:45px;
+			border: 25px solid rgba(127, 255, 255, 0.25);
+		
+			z-index: 10;
+			display: none;
+		}
+
+
+
+.c-preview {
+   
+    background: -moz-linear-gradient(-45deg, #000000 0%, #000000 25%, #1e539e 50%,rgb(0, 255, 255) 75%, #7800a8 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #000000 0%, #000000 25%, #1e539e 50%, rgb(0, 255, 255) 75%, #7800a8 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #000000 0%, #000000 25%, #1e539e 50%, rgb(0, 255, 255) 75%, #7800a8 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-size: 400% 400%;
+    background-repeat: no-repeat;  
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    transition: 1s all;
+    margin:20px auto;
+  }
+  .c-preview__img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: -webkit-linear-gradient(left top, red , blue); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom right, red, blue); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom right, red, blue); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom right, red , blue); /* 标准的语法 */
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3;
+    mix-blend-mode: screen;
+  }
+  .c-preview:active {
+    background-position: 100% 100%;
+  }
+
+  @font-face {
+    font-family: 'myfont';
+    src: url('../font/mfqingshu_noncommercial-regular-webfont.woff2') format('woff2'),
+         url('../font/mfqingshu_noncommercial-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+     
+		canvas {
+			background-color: #000;
+			cursor: pointer;
+			height: 100%;
+			width: 100%
+		}
+
+		x-sign {
+			display: none;
+			position: absolute;
+			left: 4%;
+			top: 3%;
+			font-size: 2.5em;
+			color: yellow;
+			--color1: yellow;
+			--color2: lime;
+			--color3: green;
+			--color4: darkgreen;
+			font-family: Sriracha;
+			--interval: 1s;
+			text-shadow: 0 0 10px var(--color1),
+			0 0 20px var(--color2),
+			0 0 40px var(--color3),
+			0 0 80px var(--color4);
+			will-change: filter, color;
+			filter: saturate(60%);
+			animation: flicker steps(100) var(--interval) 1s infinite;
+		}
+
+		@keyframes flicker {
+			50% {
+				color: white;
+				filter: saturate(200%) hue-rotate(20deg);
+			}
+		}
+
+			#tree {
+			display: block;
+		}
+
+			#card {
+			display: none;
+		}

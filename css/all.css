@@ -101,6 +101,8 @@ html,
 			border: 0px;
 			padding: 5px 10px;
 			cursor: pointer;
+			height:100%;
+			width: 10%;
 		}
 
 		button:hover {
@@ -161,14 +163,14 @@ html,
   .c-preview:active {
     background-position: 100% 100%;
   }
-
+/* 
   @font-face {
     font-family: 'myfont';
     src: url('../font/mfqingshu_noncommercial-regular-webfont.woff2') format('woff2'),
          url('../font/mfqingshu_noncommercial-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
+} */
      
 		canvas {
 			background-color: #000;
@@ -212,4 +214,21 @@ html,
 
 			#card {
 			display: none;
+		}
+
+
+		#mask{  
+			position: absolute;  
+			left: 0px;  
+			top: 0px;  
+			right: 0px;  
+			bottom: 0px;  
+			display: none;  
+			background: rgba(0, 0, 0, 0.6);  
+			z-index:100;
+		}  
+		
+		#askname{
+			display:none;  
+			z-index:1000;
 		}

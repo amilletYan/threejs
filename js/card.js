@@ -145,7 +145,7 @@ function init() {
     for (var i = 0, l = objects.length; i < l; i++) {
 
         var theta = i * 0.5 + Math.PI;
-        var y = - (i * 58) + 1650;//位置
+        var y = - (i * 55) + 1650;//位置
 
         var object = new THREE.Object3D();
 
@@ -170,7 +170,7 @@ function init() {
         var object = new THREE.Object3D();
 
         object.position.x = ((i % 4) * 400) - 600;
-        object.position.y = (- (Math.floor(i / 4) % 4) * 700) + 1000;
+        object.position.y = (- (Math.floor(i / 4) % 5) * 700) + 1400;
         object.position.z = (Math.floor(i / 20)) * 400 ;
 
         targets.grid.push(object);

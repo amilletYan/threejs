@@ -13,8 +13,9 @@ html,
 
 		#menu {
 			position: absolute;
-			bottom: 20px;
+			bottom: 1%;
 			width: 100%;
+			height:2%;
 			text-align: center;
 		}
 
@@ -100,9 +101,10 @@ html,
 			outline: 1px solid rgba(127, 255, 255, 0.75);
 			border: 0px;
 			padding: 5px 10px;
+			margin:0 4%;
 			cursor: pointer;
 			height:100%;
-			width: 10%;
+			width: 15%;
 		}
 
 		button:hover {
@@ -213,6 +215,7 @@ html,
 		}
 
 			#card {
+	        position: absolute;
 			display: none;
 		}
 
@@ -230,5 +233,7 @@ html,
 		
 		#askname{
 			display:none;  
+			width:100%;
+		
 			z-index:1000;
 		}
